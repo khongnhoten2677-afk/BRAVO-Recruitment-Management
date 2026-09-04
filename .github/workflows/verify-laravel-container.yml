@@ -1,0 +1,23 @@
+name: Verify Laravel Container
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '01_Source_Code/tuyen-dung-Bravo/**'
+      - 'vercel.json'
+      - '.github/workflows/verify-laravel-container.yml'
+  workflow_dispatch:
+
+jobs:
+  build-container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Laravel container
+        run: |
+          docker build \
+            -f 01_Source_Code/tuyen-dung-Bravo/Dockerfile.vercel \
+            01_Source_Code/tuyen-dung-Bravo
